@@ -8,7 +8,17 @@ class AssetsController extends Controller
 {
     public function output(int $id)
     {
-        return response(file_get_contents('https://placehold.jp/150x150.png'))
-            ->header('Content-Type', 'image/jpeg');
+        /**
+         * @var \App\Services\AssetService $service
+         */
+        $service = app()->make('AssetService');
+        $asset = $service->findById($id);
+        if ($asset === null) {
+            abort(404);
+        }
+
+        $content_type = \App\Define\AssetType::findBy($asset->type, 'content_type');
+        return response($asset->content)
+            ->header('Content-Type', $content_type);
     }
 }

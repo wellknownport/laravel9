@@ -23,7 +23,7 @@ Route::get('/assets/{id}', [AssetsController::class, 'output'])
     ->name('asset');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [Controllers\Admin\PagesController::class, 'home'])->name('index');
+    Route::get('/', [Controllers\Admin\PagesController::class, 'home'])->name('home');
     Route::post('/posts/store', [Controllers\Admin\PostsController::class, 'store'])->name('posts.store');
     Route::get('/posts/create', [Controllers\Admin\PostsController::class, 'form'])->name('posts.create');
     Route::get('/posts/{id}/delete', [Controllers\Admin\PostsController::class, 'delete'])

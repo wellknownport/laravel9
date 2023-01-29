@@ -8,7 +8,11 @@ class PagesController extends Controller
 {
     public function home()
     {
-        $posts = [];
+        /**
+         * @var \App\Services\PostService $service
+         */
+        $service = app()->make('PostService');
+        $posts = $service->getPosts();
 
         return view('home', [
             'posts' => $posts
