@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
+
+use \App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [PagesController::class, 'home'])->name('home');
+Route::get('/assets/{id}', [AssetsController::class, 'output'])
+    ->where('id', '[0-9]+')
+    ->name('asset');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [Controllers\Admin\PagesController::class, 'home'])->name('index');
+    Route::post('/posts/store', [Controllers\Admin\PostsController::class, 'store'])->name('posts.store');
+    Route::get('/posts/create', [Controllers\Admin\PostsController::class, 'form'])->name('posts.create');
+    Route::get('/posts/{id}/delete', [Controllers\Admin\PostsController::class, 'delete'])
+        ->where('id', '[0-9]+')
+        ->name('posts.delete');
+    Route::get('/post/{id}/update', [Controllers\Admin\PostsController::class, 'form'])
+        ->where('id', '[0-9]+')
+        ->name('posts.update');
 });
+
