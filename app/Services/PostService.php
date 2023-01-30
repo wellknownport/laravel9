@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class PostService
 {
-    public function getPosts()
+    public function getPosts(int $num = 5)
     {
         $asset = DB::table('asset_post')
             ->select([DB::raw('MAX(asset_post.asset_id) AS `asset_id`'), DB::raw('MAX(asset_post.post_id) AS `post_id`')])
             ->leftJoin('assets', 'asset_post.asset_id', '=', 'assets.id')
-            ->where('assets.type', 1)
+            ->where('assets.type', \App\Define\AssetType::IMAGE_JPEG)
             ->groupBy('asset_post.post_id');
 
         //dd($asset->toSql());
@@ -30,7 +30,7 @@ class PostService
                 $join->on('posts.id', '=', 'asset_post.post_id');
             })
             ->orderBy('release_at', 'DESC')
-            ->paginate(5);
+            ->paginate($num);
 
         return $posts;
     }
@@ -41,10 +41,21 @@ class PostService
      */
     public function findById(int $post_id)
     {
-        $post = DB::table('posts')->find($post_id);
-        if (!empty($post)) {
-            $post = new \App\Entities\PostEntity($post);
+        $post = null;
+
+        $row = DB::table('posts')
+            ->select([
+                'posts.*', 'asset_post.asset_id'
+            ])
+            ->leftJoin('asset_post', 'asset_post.post_id', '=', 'posts.id')
+            ->where('posts.id', '=', $post_id)
+            ->first();
+
+        if (!empty($row)) {
+            $post = new \App\Entities\PostEntity($row);
+            $post->setAssetId($row->asset_id);
         }
+
         return $post;
     }
 

@@ -29,7 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/posts/{id}/delete', [Controllers\Admin\PostsController::class, 'delete'])
         ->where('id', '[0-9]+')
         ->name('posts.delete');
-    Route::get('/post/{id}/update', [Controllers\Admin\PostsController::class, 'form'])
+    Route::get('/posts/{id}/update', [Controllers\Admin\PostsController::class, 'form'])
         ->where('id', '[0-9]+')
         ->name('posts.update');
 });

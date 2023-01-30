@@ -11,8 +11,10 @@
                         @endif
                     </div>
                     <div class="text">
-                        {{ $post->release_at }}
-                        {{ $post->content }}
+                        <dl>
+                            <dt class="datetime">{{ $post->release_at }}</dt>
+                            <dd class="main-text">{{ $post->content }}</dd>
+                        </dl>
                     </div>
                 </div>
             @endforeach

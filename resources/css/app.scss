@@ -1,0 +1,183 @@
+@import "reset";
+
+html, body {
+    background: #e2e8f0;
+}
+
+header {
+    padding: 4.8rem;
+
+    .app-title {
+        text-align: center;
+    }
+}
+
+main {
+    .container {
+        padding: 4.8rem;
+    }
+
+    .posts {
+        .post {
+            display: flex;
+            background: white;
+            margin-bottom: 1.6rem;
+
+            .image {
+                padding: 1.6rem;
+                flex-basis: 20%;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .text {
+                padding: 1.6rem;
+                flex-basis: 80%;
+
+                .datetime {
+                    font-weight: 800;
+                    margin-bottom: 0.8rem;
+                }
+
+                .actions {
+                    margin-top: 1.6rem;
+                    text-align: right;
+
+                    a {
+                        display: inline-block;
+                        padding: 0.4rem 1.6rem;
+                        text-decoration: none;
+                        border: 2px solid dodgerblue;
+                        color: dodgerblue;
+
+                        &.danger {
+                            border-color: darkred;
+                            color: darkred;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.flash-messages {
+    padding: 0 4.8rem;
+    .inner {
+        text-align: center;
+        margin-bottom: 1.6rem;
+        background: lightcyan;
+        padding: 0.8rem;
+    }
+}
+
+.toolbar {
+    margin-bottom: 1.6rem;
+    .actions {
+        text-align: right;
+        .action {
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.4rem 1.6rem;
+            background: dodgerblue;
+            font-weight: 800;
+            color: white;
+            transition: background-color .4s;
+            &:hover {
+                background: darkblue;
+            }
+        }
+    }
+}
+.app-form {
+    background: white;
+
+    .header {
+        padding: 1.6rem;
+        border-bottom: 1px solid #ccc;
+        h1 {
+            text-align: center;
+            font-weight: 800;
+        }
+    }
+    .error-messages {
+        padding: 1.6rem;
+        ul {
+            li {
+                color: red;
+            }
+        }
+    }
+    .row {
+        padding: 0.8rem 1.6rem;
+    }
+
+    .preview {
+        padding: 0.8rem;
+        background: whitesmoke;
+    }
+
+    label {
+        display: block;
+        font-weight: 800;
+        margin-bottom: 0.4rem;
+    }
+
+    .ctrl {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        background: white;
+
+        &.inline {
+            display: inline-block;
+            width: auto;
+        }
+    }
+    .actions {
+        padding: 0.8rem 1.6rem;
+        text-align: center;
+        .btn {
+            display: inline-block;
+            padding: 0.4rem 1.6rem;
+            transition: background-color .4s;
+            &.submit {
+                background: dodgerblue;
+                color: white;
+                font-weight: 800;
+                border: none;
+                padding: 0.8rem 3.2rem;
+                &:hover {
+                    cursor: pointer;
+                    background: lighten(dodgerblue, 16%);
+                }
+            }
+        }
+    }
+}
+
+nav {
+    text-align: center;
+
+    .pagination {
+        display: inline-flex;
+
+        li {
+            a {
+                text-decoration: none;
+                padding: 8px;
+                display: inline-block;
+            }
+
+            &.active, &.disabled {
+                span {
+                    text-decoration: none;
+                    padding: 8px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,13 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.posts.create') }}">新規作成</a>
+
+        <div class="toolbar">
+            <div class="actions">
+                <a href="{{ route('admin.posts.create') }}" class="action">新規作成</a>
+            </div>
+        </div>
+
         <div class="posts">
             @foreach ($posts as $post)
                 <div class="post">
@@ -14,10 +20,10 @@
                     </div>
                     <div class="text">
                         {{ $post->content }}
-                    </div>
-                    <div class="actions">
-                        <a href="{{ route('admin.posts.update', $post->id) }}">編集</a>
-                        <a href="{{ route('admin.posts.delete', $post->id) }}">削除</a>
+                        <div class="actions">
+                            <a href="{{ route('admin.posts.update', $post->id) }}" class="btn update">編集</a>
+                            <a href="{{ route('admin.posts.delete', $post->id) }}" class="btn danger">削除</a>
+                        </div>
                     </div>
                 </div>
             @endforeach

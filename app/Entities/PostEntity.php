@@ -22,4 +22,16 @@ class PostEntity extends Entity
         'updated_at' => '',
         'release_at' => '',
     ];
+
+    protected $asset_id = 0;
+
+    public function setAssetId(int $asset_id)
+    {
+        $this->asset_id = $asset_id;
+    }
+
+    public function getAssetId()
+    {
+        return $this->asset_id;
+    }
 }
