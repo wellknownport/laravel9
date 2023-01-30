@@ -73,6 +73,12 @@ main {
     }
 }
 
+.user-status {
+    text-align: center;
+    form {
+        display: inline-block;
+    }
+}
 .toolbar {
     margin-bottom: 1.6rem;
     .actions {

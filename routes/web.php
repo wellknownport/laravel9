@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers;
@@ -17,20 +18,23 @@ use \App\Http\Controllers;
 |
 */
 
+
 Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/assets/{id}', [AssetsController::class, 'output'])
     ->where('id', '[0-9]+')
     ->name('asset');
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [Controllers\Admin\PagesController::class, 'home'])->name('home');
-    Route::post('/posts/store', [Controllers\Admin\PostsController::class, 'store'])->name('posts.store');
-    Route::get('/posts/create', [Controllers\Admin\PostsController::class, 'form'])->name('posts.create');
-    Route::get('/posts/{id}/delete', [Controllers\Admin\PostsController::class, 'delete'])
+
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\PagesController::class, 'home'])->name('home');
+    Route::post('/posts/store', [App\Http\Controllers\Admin\PostsController::class, 'store'])->name('posts.store');
+    Route::get('/posts/create', [App\Http\Controllers\Admin\PostsController::class, 'form'])->name('posts.create');
+    Route::get('/posts/{id}/delete', [App\Http\Controllers\Admin\PostsController::class, 'delete'])
         ->where('id', '[0-9]+')
         ->name('posts.delete');
-    Route::get('/posts/{id}/update', [Controllers\Admin\PostsController::class, 'form'])
+    Route::get('/posts/{id}/update', [App\Http\Controllers\Admin\PostsController::class, 'form'])
         ->where('id', '[0-9]+')
         ->name('posts.update');
 });
 
+require __DIR__.'/auth.php';
